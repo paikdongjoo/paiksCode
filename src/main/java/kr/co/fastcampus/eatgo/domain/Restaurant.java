@@ -5,10 +5,16 @@ public class Restaurant {
 
     private final String name;
     private final String address;
+    private final Long id;
 
-    public Restaurant(String name, String address) {
+    public Restaurant(Long id, String name, String address) {
+        this.id = id;
         this.name = name;
         this.address = address;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -22,6 +28,5 @@ public class Restaurant {
     public String getInformation() {
         return name + " in " + address;
     }
-
 
 }
