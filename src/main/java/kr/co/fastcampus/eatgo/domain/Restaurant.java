@@ -1,6 +1,8 @@
 package kr.co.fastcampus.eatgo.domain;
 
 
+import lombok.*;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,6 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Restaurant {
 
     @Id
@@ -21,9 +28,6 @@ public class Restaurant {
     
     @Transient // 직접 db에 값이 옮겨지는게 아니라 확인용 JSON을 위해 작성
     private List<MenuItem> menuItems = new ArrayList<MenuItem>();
-
-    public Restaurant() {
-    }
 
     public void setId(long id) {
         this.id = id;
@@ -38,18 +42,6 @@ public class Restaurant {
         this.id = id;
         this.name = name;
         this.address = address;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getAddress() {
-        return address;
     }
 
     public String getInformation() {
