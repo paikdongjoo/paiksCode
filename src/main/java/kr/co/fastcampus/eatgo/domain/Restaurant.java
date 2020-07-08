@@ -29,6 +29,10 @@ public class Restaurant {
     @Transient // 직접 db에 값이 옮겨지는게 아니라 확인용 JSON을 위해 작성
     private List<MenuItem> menuItems = new ArrayList<MenuItem>();
 
+    public Restaurant(){
+
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -66,4 +70,5 @@ public class Restaurant {
         this.name = name;
         this.address = address;
     }
+
 }
