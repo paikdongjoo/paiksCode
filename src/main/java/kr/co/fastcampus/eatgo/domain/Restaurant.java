@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,9 @@ public class Restaurant {
     @GeneratedValue
     private Long id;
 
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String address;
 
     @Transient // 직접 db에 값이 옮겨지는게 아니라 확인용 JSON을 위해 작성
