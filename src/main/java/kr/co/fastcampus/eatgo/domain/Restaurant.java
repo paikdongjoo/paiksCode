@@ -25,20 +25,11 @@ public class Restaurant {
     private String name;
     private String address;
 
-    
     @Transient // 직접 db에 값이 옮겨지는게 아니라 확인용 JSON을 위해 작성
     private List<MenuItem> menuItems;
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public String getInformation() {
         return name + " in " + address;
-    }
-
-    public List<MenuItem> getMenuItems(){
-        return menuItems;
     }
 
     public void setMenuItem(List<MenuItem> menuItems) {
