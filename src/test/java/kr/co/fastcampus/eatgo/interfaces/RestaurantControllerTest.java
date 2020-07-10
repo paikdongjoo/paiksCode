@@ -3,6 +3,7 @@ package kr.co.fastcampus.eatgo.interfaces;
 import kr.co.fastcampus.eatgo.application.RestaurantService;
 import kr.co.fastcampus.eatgo.domain.MenuItem;
 import kr.co.fastcampus.eatgo.domain.Restaurant;
+import kr.co.fastcampus.eatgo.domain.RestaurantNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,8 +52,8 @@ class RestaurantControllerTest {
     }
 
     @Test
-    public void detail() throws Exception {
-        Restaurant restaurant = Restaurant.builder()
+    public void detailWithExisted() throws Exception {
+        Restaurant restaurant1 = Restaurant.builder()
                 .id(1004L)
                 .name("JOKER House")
                 .address("Seoul")
@@ -86,6 +86,15 @@ class RestaurantControllerTest {
                 .andExpect(content().string(containsString("\"id\":2020")))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("\"name\":\"Cyber Food\"")));
+    }
+
+    @Test
+    public void detailWithNotExisted() throws Exception {
+        given(restaurantService.getRestaurant(404L)).willThrow(new RestaurantNotFoundException(404L));
+        mvc.perform(get("/restaurants/404"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("{}"));
+
     }
 
     @Test
